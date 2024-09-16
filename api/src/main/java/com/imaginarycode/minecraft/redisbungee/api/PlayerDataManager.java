@@ -28,10 +28,7 @@ import redis.clients.jedis.Response;
 import redis.clients.jedis.UnifiedJedis;
 
 import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public abstract class PlayerDataManager<P, LE, DE, PS extends IPubSubMessageEvent, SC extends IPlayerChangedServerNetworkEvent, NJE extends IPlayerLeftNetworkEvent, CE> {
@@ -248,7 +245,9 @@ public abstract class PlayerDataManager<P, LE, DE, PS extends IPubSubMessageEven
                 public Multimap<String, UUID> doPooledPipeline(Pipeline pipeline) {
                     HashMap<UUID, Response<String>> responses = new HashMap<>();
                     for (UUID uuid : uuids) {
-                        responses.put(uuid, pipeline.hget("redis-bungee::" + networkId + "::player::" + uuid + "::data", "server"));
+                        Optional.ofNullable(pipeline.hget("redis-bungee::" + networkId + "::player::" + uuid + "::data", "server")).ifPresent(stringResponse -> {
+                            responses.put(uuid, stringResponse);
+                        });
                     }
                     pipeline.sync();
                     responses.forEach((uuid, response) -> {
@@ -264,13 +263,14 @@ public abstract class PlayerDataManager<P, LE, DE, PS extends IPubSubMessageEven
                 public Multimap<String, UUID> clusterPipeline(ClusterPipeline pipeline) {
                     HashMap<UUID, Response<String>> responses = new HashMap<>();
                     for (UUID uuid : uuids) {
-                        responses.put(uuid, pipeline.hget("redis-bungee::" + networkId + "::player::" + uuid + "::data", "server"));
+                        Optional.ofNullable(pipeline.hget("redis-bungee::" + networkId + "::player::" + uuid + "::data", "server")).ifPresent(stringResponse -> {
+                            responses.put(uuid, stringResponse);
+                        });
                     }
                     pipeline.sync();
                     responses.forEach((uuid, response) -> {
                         String key = response.get();
                         if (key == null) return;
-
                         builder.put(key, uuid);
                     });
                     return builder.build();
