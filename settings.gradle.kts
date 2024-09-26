@@ -56,7 +56,7 @@ dependencyResolutionManagement {
         val caffeineVersion = "3.1.8"
         val adventureVersion = "4.16.0"
         val acf = "0.5.1-SNAPSHOT"
-        val bungeecordApiVersion = "1.20-R0.1-SNAPSHOT"
+        val bungeecordApiVersion = "1.21-R0.1-SNAPSHOT"
         val velocityVersion = "3.3.0-SNAPSHOT";
 
 
