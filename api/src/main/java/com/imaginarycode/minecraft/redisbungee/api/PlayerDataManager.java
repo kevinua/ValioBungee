@@ -54,18 +54,18 @@ public abstract class PlayerDataManager<P, LE, DE, PS extends IPubSubMessageEven
 
     // handle network wide
     // server change
-    public abstract void onPlayerChangedServerNetworkEvent(SC event);
+    //l public abstract void onPlayerChangedServerNetworkEvent(SC event);
 
-    public abstract void onNetworkPlayerQuit(NJE event);
+    // public abstract void onNetworkPlayerQuit(NJE event);
 
     // local events
-    public abstract void onPubSubMessageEvent(PS event);
+    //public abstract void onPubSubMessageEvent(PS event);
 
-    public abstract void onServerConnectedEvent(CE event);
+    //public abstract void onServerConnectedEvent(CE event);
 
-    public abstract void onLoginEvent(LE event);
+    //public abstract void onLoginEvent(LE event);
 
-    public abstract void onDisconnectEvent(DE event);
+    //public abstract void onDisconnectEvent(DE event);
 
     protected void handleNetworkPlayerServerChange(IPlayerChangedServerNetworkEvent event) {
         this.serverCache.invalidate(event.getUuid());

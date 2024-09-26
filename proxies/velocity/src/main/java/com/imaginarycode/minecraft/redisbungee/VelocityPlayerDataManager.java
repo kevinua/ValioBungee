@@ -33,25 +33,21 @@ public class VelocityPlayerDataManager extends PlayerDataManager<Player, PostLog
         super(plugin);
     }
 
-    @Override
     @Subscribe
     public void onPlayerChangedServerNetworkEvent(PlayerChangedServerNetworkEvent event) {
         handleNetworkPlayerServerChange(event);
     }
 
-    @Override
     @Subscribe
     public void onNetworkPlayerQuit(PlayerLeftNetworkEvent event) {
         handleNetworkPlayerQuit(event);
     }
 
-    @Override
     @Subscribe
     public void onPubSubMessageEvent(PubSubMessageEvent event) {
         handlePubSubMessageEvent(event);
     }
 
-    @Override
     @Subscribe
     public void onServerConnectedEvent(ServerConnectedEvent event) {
         final String currentServer = event.getServer().getServerInfo().getName();
@@ -88,13 +84,11 @@ public class VelocityPlayerDataManager extends PlayerDataManager<Player, PostLog
         }
     }
 
-    @Override
     @Subscribe
     public void onLoginEvent(PostLoginEvent event) {
         addPlayer(event.getPlayer().getUniqueId(), event.getPlayer().getUsername(), event.getPlayer().getRemoteAddress().getAddress());
     }
 
-    @Override
     @Subscribe
     public void onDisconnectEvent(DisconnectEvent event) {
         if (event.getLoginStatus() == DisconnectEvent.LoginStatus.SUCCESSFUL_LOGIN || event.getLoginStatus() == DisconnectEvent.LoginStatus.PRE_SERVER_JOIN) {

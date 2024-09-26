@@ -34,25 +34,21 @@ public class BungeePlayerDataManager extends PlayerDataManager<ProxiedPlayer, Po
         super(plugin);
     }
 
-    @Override
     @EventHandler
     public void onPlayerChangedServerNetworkEvent(PlayerChangedServerNetworkEvent event) {
         super.handleNetworkPlayerServerChange(event);
     }
 
-    @Override
     @EventHandler
     public void onNetworkPlayerQuit(PlayerLeftNetworkEvent event) {
         super.handleNetworkPlayerQuit(event);
     }
 
-    @Override
     @EventHandler
     public void onPubSubMessageEvent(PubSubMessageEvent event) {
         super.handlePubSubMessageEvent(event);
     }
 
-    @Override
     @EventHandler
     public void onServerConnectedEvent(ServerConnectedEvent event) {
         final String currentServer = event.getServer().getInfo().getName();
@@ -87,13 +83,11 @@ public class BungeePlayerDataManager extends PlayerDataManager<ProxiedPlayer, Po
 
     }
 
-    @Override
     @EventHandler
     public void onLoginEvent(PostLoginEvent event) {
         super.addPlayer(event.getPlayer().getUniqueId(), event.getPlayer().getName(), event.getPlayer().getAddress().getAddress());
     }
 
-    @Override
     @EventHandler
     public void onDisconnectEvent(PlayerDisconnectEvent event) {
         super.removePlayer(event.getPlayer().getUniqueId());
