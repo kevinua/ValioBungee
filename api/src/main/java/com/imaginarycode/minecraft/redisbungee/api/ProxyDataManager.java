@@ -66,9 +66,9 @@ public abstract class ProxyDataManager implements Runnable {
         this.plugin = plugin;
         this.proxyId = this.plugin.configuration().getProxyId();
         this.unifiedJedis = plugin.getSummoner().obtainResource();
-        this.destroyProxyMembers();
         this.networkId = plugin.configuration().networkId();
         this.STREAM_ID = "network-" + this.networkId + "-redisbungee-stream";
+        this.destroyProxyMembers();
     }
 
     public abstract Set<UUID> getLocalOnlineUUIDs();
